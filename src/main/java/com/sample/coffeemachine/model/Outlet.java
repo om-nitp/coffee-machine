@@ -7,7 +7,7 @@ public class Outlet {
     @Getter
     private final String outletName;
     @Getter
-    private volatile OutletStatus outletStatus;
+    private OutletStatus outletStatus;
 
     public Outlet(int id, String name) {
         this.id = id;
