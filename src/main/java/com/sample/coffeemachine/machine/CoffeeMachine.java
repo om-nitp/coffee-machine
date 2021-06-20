@@ -3,8 +3,8 @@ package com.sample.coffeemachine.machine;
 import static com.sample.coffeemachine.model.OutletStatus.IDLE;
 import static com.sample.coffeemachine.model.OutletStatus.IN_PROGRESS;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.sample.coffeemachine.beverages.Beverage;
 import com.sample.coffeemachine.beverages.BeverageType;
@@ -30,27 +30,22 @@ public class CoffeeMachine {
 
     public void brewBeverage(int outletId, BeverageType beverageType) throws InterruptedException {
         if(!outlets.containsKey(outletId)) {
-            System.out.println(outletId + " is not present");
+            System.out.println(outletId + " does not exist");
             return;
         }
+        
         Outlet outlet = outlets.get(outletId);
-        synchronized (this) {
-            if (outlet.getOutletStatus() != IDLE) {
-                System.out.println("Outlet number " + outletId + " is not available");
-                return;
-            }
-            outlet.updateStatus(IN_PROGRESS);
+        if (outlet.getOutletStatus() != IDLE) {
+            System.out.println("Outlet number " + outletId + " is not available");
+            return;
         }
+        outlet.updateStatus(IN_PROGRESS);
 
-        brewer.setOutlet(outlet);
-        brewer.setBeverageType(beverageType);
-        Thread newBrewer = new Thread(brewer);
+        Thread brewer = new Thread(new Brewer(availableResources, outlet, beverageType));
         try {
-            newBrewer.start();
+            brewer.start();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-        } finally {
-            outlet.updateStatus(IDLE);
         }
     }
 
