@@ -30,7 +30,7 @@ public class Brewer implements Runnable {
         Map<IngredientsType, Double> availableQuantities = availableResources.getAvailableQuantities();
         System.out.println("Preparing " + beverageType + " .....");
 
-        synchronized (this) {
+        synchronized (Brewer.class) {
             for (Map.Entry<IngredientsType, Double> requiredIngredient : RequiredIngredients
                     .getRequiredIngredientQuantity(beverageType).entrySet()) {
                 if (availableQuantities.get(requiredIngredient.getKey()) < requiredIngredient.getValue()) {
