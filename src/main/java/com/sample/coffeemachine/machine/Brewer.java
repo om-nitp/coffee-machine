@@ -56,6 +56,10 @@ public class Brewer implements Runnable {
     @SneakyThrows
     @Override
     public void run() {
-        brew();
+        try {
+            brew();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }
