@@ -15,15 +15,13 @@ import com.sample.coffeemachine.model.Outlet;
 public class CoffeeMachine {
     private final Map<Integer, Outlet> outlets;
     private final AvailableResources availableResources;
-    private final Brewer brewer;
-
+    
     public CoffeeMachine(int totalOutlets) {
         this.availableResources = new AvailableResources(InitialResources.initialResources);
         this.outlets = new HashMap<>();
         for(int i=1; i<=totalOutlets; i++) {
             outlets.put(i, new Outlet(i, "Outlet number: " + i));
         }
-        this.brewer = new Brewer(availableResources);
     }
 
     public void brewBeverage(int outletId, BeverageType beverageType) {
