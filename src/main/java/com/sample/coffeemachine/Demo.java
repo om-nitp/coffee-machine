@@ -12,13 +12,7 @@ public class Demo {
 
         coffeeMachine.brewBeverage(1, HOT_WATER);
         coffeeMachine.brewBeverage(1, HOT_WATER);
-        Thread.sleep(1000);
-        coffeeMachine.brewBeverage(1, HOT_WATER);
-        coffeeMachine.brewBeverage(1, HOT_WATER);
-        coffeeMachine.brewBeverage(1, HOT_WATER);
-        coffeeMachine.brewBeverage(1, HOT_WATER);
-        coffeeMachine.brewBeverage(1, HOT_WATER);
-        coffeeMachine.brewBeverage(1, HOT_WATER);
-        coffeeMachine.brewBeverage(1, HOT_WATER);
+        coffeeMachine.brewBeverage(2, COFFEE);
+        coffeeMachine.brewBeverage(3, HOT_TEA);
     }
 }
