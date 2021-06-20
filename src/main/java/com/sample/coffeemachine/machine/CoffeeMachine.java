@@ -6,11 +6,9 @@ import static com.sample.coffeemachine.model.OutletStatus.IN_PROGRESS;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.sample.coffeemachine.beverages.Beverage;
 import com.sample.coffeemachine.beverages.BeverageType;
 import com.sample.coffeemachine.config.IngredientsType;
 import com.sample.coffeemachine.config.InitialResources;
-import com.sample.coffeemachine.exceptions.SelectedOutletNotAvailableException;
 import com.sample.coffeemachine.model.AvailableResources;
 import com.sample.coffeemachine.model.Outlet;
 
@@ -28,7 +26,7 @@ public class CoffeeMachine {
         this.brewer = new Brewer(availableResources);
     }
 
-    public void brewBeverage(int outletId, BeverageType beverageType) throws InterruptedException {
+    public void brewBeverage(int outletId, BeverageType beverageType) {
         if(!outlets.containsKey(outletId)) {
             System.out.println(outletId + " does not exist");
             return;
@@ -42,11 +40,7 @@ public class CoffeeMachine {
         outlet.updateStatus(IN_PROGRESS);
 
         Thread brewer = new Thread(new Brewer(availableResources, outlet, beverageType));
-        try {
-            brewer.start();
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
+        brewer.start();
     }
 
     public void addQuantity(IngredientsType type, double quantity) {
