@@ -6,7 +6,6 @@ import static com.sample.coffeemachine.model.OutletStatus.IDLE;
 
 import java.util.Map;
 
-import lombok.Setter;
 import lombok.SneakyThrows;
 
 import com.sample.coffeemachine.beverages.BeverageType;
@@ -18,13 +17,13 @@ import com.sample.coffeemachine.model.Outlet;
 
 public class Brewer implements Runnable {
     private final AvailableResources availableResources;
-    @Setter
-    private Outlet outlet;
-    @Setter
-    private BeverageType beverageType;
+    private final Outlet outlet;
+    private final BeverageType beverageType;
 
-    public Brewer(AvailableResources availableResources) {
+    public Brewer(AvailableResources availableResources, Outlet outlet, BeverageType beverageType) {
         this.availableResources = availableResources;
+        this.outlet = outlet;
+        this.beverageType = beverageType;
     }
 
     private boolean brew() throws InterruptedException {
